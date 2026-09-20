@@ -8,7 +8,7 @@ safety:
   approvals_required: [plan, branch, deploy, pull_request]
 integrations:
   jira:
-    command: "jira issue view {issue_key} --json"
+    command: "py -3 scripts/get_jira_story.py {issue_key} --output thoughts/source/{issue_key}.json"
   git:
     branch_command: "git switch -c {branch}"
     commit_command: "git add -A && git commit -m \"{issue_key}: {summary}\""

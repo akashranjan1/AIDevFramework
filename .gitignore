@@ -1,0 +1,6 @@
+.env
+.env.example
+thoughts/source/
+.delivery-runs/
+__pycache__/
+.pytest_cache/
