@@ -1,0 +1,11 @@
+[project]
+name = "salesforce-delivery-orchestrator"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["PyYAML>=6.0"]
+
+[project.scripts]
+sfdc-delivery = "sfdc_orchestrator.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,45 @@
+project:
+  name: salesforce-platform
+  default_branch: main
+  branch_pattern: "feature/{issue_key}-{slug}"
+safety:
+  dry_run: true
+  require_clean_worktree: true
+  approvals_required: [plan, branch, deploy, pull_request]
+integrations:
+  jira:
+    command: "jira issue view {issue_key} --json"
+  git:
+    branch_command: "git switch -c {branch}"
+    commit_command: "git add -A && git commit -m \"{issue_key}: {summary}\""
+  salesforce:
+    validate_command: "sf project deploy validate --target-org {org} --test-level RunLocalTests --wait 30"
+    deploy_command: "sf project deploy start --target-org {org} --test-level RunLocalTests --wait 30"
+  github:
+    pr_command: "gh pr create --base {base_branch} --head {branch} --title \"{issue_key}: {summary}\" --body-file {pr_body_file}"
+environments:
+  dev: { org: dev-sandbox, deployment_mode: validate }
+  uat: { org: uat-sandbox, deployment_mode: validate }
+  prod: { org: production, deployment_mode: deploy, requires_change_approval: true }
+pipeline:
+  stages:
+    - id: discovery
+      requires: []
+    - id: plan
+      requires: [discovery]
+      approval: plan
+    - id: branch
+      requires: [plan]
+      approval: branch
+    - id: implement
+      requires: [branch]
+    - id: quality
+      requires: [implement]
+    - id: validate
+      requires: [quality]
+      approval: deploy
+    - id: commit
+      requires: [validate]
+    - id: pull_request
+      requires: [commit]
+      approval: pull_request

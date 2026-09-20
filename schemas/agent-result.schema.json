@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent delivery result",
+  "type": "object",
+  "required": ["issue_key", "summary", "files_changed", "tests", "risks"],
+  "properties": {
+    "issue_key": {"type": "string"}, "summary": {"type": "string"},
+    "files_changed": {"type": "array", "items": {"type": "string"}},
+    "tests": {"type": "array", "items": {"type": "object"}},
+    "risks": {"type": "array", "items": {"type": "string"}},
+    "rollback": {"type": "string"}
+  }
+}
