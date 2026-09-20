@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Salesforce Delivery Orchestrator
 
 Provider-neutral automation for taking a Jira story through a governed Salesforce delivery lifecycle: discovery, planning, branch creation, implementation, validation, deployment, commit, and pull request.
@@ -48,3 +49,6 @@ tests/              policy tests
 ```
 
 To extend it, add stages in YAML or replace command templates with real adapters for Jira, Git, Salesforce DX, GitHub, Azure DevOps, or your CI system.
+=======
+# AIDevFramework
+>>>>>>> d8c95cbd9b228a708fc64637f3c9633038991c32
